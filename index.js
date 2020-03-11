@@ -1,8 +1,5 @@
 // Yi-Chia Chen
 
-// experiment variables
-var formal = true;
-
 // trial variables for demo
 var headphonePracN = 1;
 var headphoneTrialN = 2;
@@ -47,13 +44,7 @@ $(document).ready(function(){
       myLoadSounds(0,stimPath,audsrc,stimLoaded); // execute stimLoaded function after audio files are loaded
     }
     subj = new subjObject();
-    if (subj.phone){
-        $('#instrText').html('It seems that you are using a touchscreen device and/or stylus. Please use a laptop or desktop instead.<br /><br />If you believe you have received this message in error, please contact the experimenter at yi-chia.chen@fas.harvard.edu<br /><br />Otherwise, please return the HIT.');
-        $('#instrBox').show();
-    }
-    else{
-        startInstr();
-    }
+    startInstr();
 });
 
 /*
@@ -66,25 +57,7 @@ $(document).ready(function(){
 
 class subjObject{
     constructor(){
-        this.dateObj = new Date();
-        this.date = myDate(this.dateObj,'UTC','-',true);
-        this.startTime = myTime(this.dateObj,'UTC',':',true);
-        this.userAgent = window.navigator.userAgent;
         this.blockOrder = ['V', 'A'];
-        this.invalidID = false;
-        this.data = 'SubjNo.\tUTCStartDate\tUTCStartTime\tSONAID\tUserAgent\tUTCEndTime\tExptDuration\tinstrQattemptN\tdailyAesV?\tdailyAesA?\tserious?\tProblems?\tInFullView?\tviewportWidth\tviewportHeight\tSecondBlock\n';
-    }
-
-    get phone(){ // getter runs when you ask for the property
-        var md = new MobileDetect(this.userAgent);
-        return md.mobile() ? true : false;
-    }
-
-    get viewportSize(){
-        var w = $(window).width();
-        var h = $(window).height();
-        var inView = (w >= 650) && (h >= 550);
-        return {'h': h, 'w': w, 'inView': inView};
     }
 
     submitQ(){
