@@ -1,0 +1,213 @@
+/* Yi-Chia Chen */
+
+body{
+	color: #FFFFFF;
+	background: #808080;
+	margin: 0;
+  padding: 0;
+	font-family: 'Quicksand', Sans-serif;
+	font-size: 16px;
+	line-height: 28px;
+}
+div.pageBox{
+	display: none;
+	position: relative;
+	margin: 20px auto auto auto;
+	width: 800px;
+}
+
+/* Instructions */
+div.button{
+	position: relative;
+	margin: 20px auto 20px auto;
+	width: 100px;
+  height: 35px;
+	background: gray;
+  -moz-border-radius: 50px 50px 50px 50px;
+  -webkit-border-radius: 50px 50px 50px 50px;
+  border-radius: 50px 50px 50px 50px;
+	border: 0;
+	background: -webkit-gradient(linear, top, bottom, color-stop(#FFFFFF), color-stop(#EFEFEF)); /* For Safari/Chrome 10 */
+	background: -webkit-linear-gradient(top, #FFFFFF, #EFEFEF); /* For Chrome 11+ */
+	background:    -moz-linear-gradient(top, #FFFFFF, #EFEFEF); /* For Firefox 3.6 to 15 */
+	background:     -ms-linear-gradient(top, #FFFFFF, #EFEFEF); /* For IE10 Consumer Preview */
+	background:      -o-linear-gradient(top, #FFFFFF, #EFEFEF); /* For Opera 11.1 to 12.0 */
+	background:   linear-gradient(to bottom, #FFFFFF, #EFEFEF); /* Standard syntax (must be last) */
+	-webkit-box-shadow: 0 2px 2px 2px #CCCCCC;
+  -moz-box-shadow: 0 2px 2px 2px #777777;
+	box-shadow: 0 2px 2px 1px #CFCFCF;
+	text-align: center;
+	line-height: 35px;
+	color: #555555;
+	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+div.button:hover{
+	cursor: pointer;
+}
+div.button:active{
+	background: -webkit-gradient(linear, top, bottom, color-stop(#DDDDDD), color-stop(#EEEEEE), color-stop(#F9F9F9), color-stop(#DDDDDD)); /* For Safari/Chrome 10 */
+	background: -webkit-linear-gradient(top, #DDDDDD, #EEEEEE, #F9F9F9, #DDDDDD); /* For Chrome 11+ */
+	background:    -moz-linear-gradient(top, #DDDDDD, #EEEEEE, #F9F9F9, #DDDDDD); /* For Firefox 3.6 to 15 */
+	background:     -ms-linear-gradient(top, #DDDDDD, #EEEEEE, #F9F9F9, #DDDDDD); /* For IE10 Consumer Preview */
+	background:      -o-linear-gradient(top, #DDDDDD, #EEEEEE, #F9F9F9, #DDDDDD); /* For Opera 11.1 to 12.0 */
+	background:   linear-gradient(to bottom, #DDDDDD, #EEEEEE, #F9F9F9, #DDDDDD); /* Standard syntax (must be last) */
+	-webkit-box-shadow: inset 0 -1px 2px 4px rgba(100%,100%,100%,0.7);
+  -moz-box-shadow: inset 0 -1px 2px 4px rgba(100%,100%,100%,0.7);
+	box-shadow: 0 -1px 2px 4px rgba(100%,100%,100%,0.7) inset;
+	color: #333333;
+}
+#loadButton, #startButton{
+	display: none;
+}
+#loadButton:hover{
+	cursor: default;
+}
+#loadButton:active{
+	background: -webkit-gradient(linear, top, bottom, color-stop(#FFFFFF), color-stop(#EFEFEF)); /* For Safari/Chrome 10 */
+	background: -webkit-linear-gradient(top, #FFFFFF, #EFEFEF); /* For Chrome 11+ */
+	background:    -moz-linear-gradient(top, #FFFFFF, #EFEFEF); /* For Firefox 3.6 to 15 */
+	background:     -ms-linear-gradient(top, #FFFFFF, #EFEFEF); /* For IE10 Consumer Preview */
+	background:      -o-linear-gradient(top, #FFFFFF, #EFEFEF); /* For Opera 11.1 to 12.0 */
+	background:   linear-gradient(to bottom, #FFFFFF, #EFEFEF); /* Standard syntax (must be last) */
+	-webkit-box-shadow: 0 2px 2px 2px #CCCCCC;
+	-moz-box-shadow: 0 2px 2px 2px #777777;
+	box-shadow: 0 2px 2px 1px #CFCFCF;
+	color: #555555;
+}
+
+/* Experiment */
+#testResp{
+	display: none;
+}
+#test{
+	position: relative;
+	margin: 20px auto 0 auto;
+	width: 650px;
+	height: 550px;
+	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+#stimBox{
+	position: relative;
+	margin: 20px auto 0 auto;
+	width: 650px;
+	height: 550px;
+	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+#aesImg{
+	display: none;
+	position: absolute;
+	width: 650px;
+	height: 450px;
+}
+#bufferDiv{
+	display: none;
+}
+#audioStuff{
+	display: none;
+	position: absolute;
+	top: 150px;
+	left: 225px;
+	width: 200px;
+	height: 150px;
+}
+.ratingContainer {
+	position: absolute;
+	top: 480px;
+	width: 650px;
+}
+.ratingButton{
+	position: absolute;
+	width: 45px;
+  height: 35px;
+	color: black;
+	border: 2px solid white;
+	text-align: center;
+	line-height: 35px;
+	cursor: pointer;
+}
+.ratingButton:hover{
+	border-color: #333388;
+}
+.ratingButton:active{
+	background: white;
+}
+#r1{
+	left: 165px;
+	background: #e6e6ff;
+}
+#r2{
+	left: 220px;
+	background: #ccccff;
+}
+#r3{
+	left: 275px;
+	background: #b3b3ff;
+}
+#r4{
+	left: 330px;
+	background: #9999ff;
+}
+#r5{
+	left: 385px;
+	background: #8080ff;
+}
+#r6{
+	left: 440px;
+	background: #6666ff;
+}
+#r1label, #r6label{
+	position: absolute;
+	top: 45px;
+  height: 35px;
+	color: black;
+	line-height: 35px;
+}
+#r1label{
+	left: 80px;
+}
+#r6label{
+	left: 440px;
+}
+
+/* Questions */
+.likertWrap{
+	position: relative;
+	margin: 20px auto auto auto;
+	width: 630px;
+	height: 60px;
+}
+.likertLine{
+	position: absolute;
+	top: 9px;
+	left: 45px;
+	margin: 0 0 0 0;
+	width: 540px;
+	height: 6px;
+	background: #ccc;
+	z-index:1;
+}
+.likert{
+	position: relative;
+	margin: 0 0 0 0;
+	width: 90px;
+	float:left;
+	z-index:2;
+}

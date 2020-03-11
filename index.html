@@ -1,0 +1,175 @@
+<!-- HTML 5, CSS3, JQuery 3.2.1, JavaScript -->
+<!-- Yi-Chia Chen -->
+<!-- Finalized? True -->
+
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8'>
+    <title>McMaster University Experiment</title>
+    <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
+    <link rel='stylesheet' href='index.css' />
+  </head>
+  <body>
+    <noscript>It seems that JavaScript is disabled in your browser. Please go to settings and enable JavaScript for this experiment.</noscript>
+
+
+    <!--======== INSTRUCTIONS ========-->
+    <div class='pageBox' id='instrBox'>
+      <p id='instrText'></p>
+      <div class='button' id='nextButton' onclick='instr.next()'>Next</div>
+      <div class='button' id='loadButton'>Loading...</div>
+    </div>
+
+    <!--======== CALIBRATION ========-->
+    <div class='pageBox' id='calibration'>
+      <p id='calibrationInstr'>You may play this calibration sound as many times as you like until you've finished adjusting the volume on your computer. Press the "Done" button when you are done.</p>
+      <div>
+        <audio id='calibrationSound'>
+          <source src='Stimuli/calibrationNoise.mp3' type='audio/mpeg'>
+          Your browser does not support the audio element.
+        </audio>
+        <div class='button' onclick='playCalibrationSound()'>Replay</div>
+      </div>
+      <div class='button' id='calibrationButton' onclick='calibrationDone()'>Done</div>
+    </div>
+
+    <!--======== TEST ========-->
+    <div class='pageBox' id='test'>
+      <div>
+        <audio id='testSound'>
+          <source src='Stimuli/calibrationNoise.mp3' type='audio/mpeg'>
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+
+      <img id='testPlaying' src='Stimuli/testPlaying.png' alt='' />
+
+      <div id='testResp'>
+        <p id='testQ'>Which sound was the SOFTEST (quietest)?</p>
+        <input type='radio' name='testOption' id='option1' value='1' /><label for='option1'>FIRST sound</label><br/>
+        <input type='radio' name='testOption' id='option2' value='2' /><label for='option2'>SECOND sound</label><br/>
+        <input type='radio' name='testOption' id='option3' value='3' /><label for='option3'>THIRD sound</label>
+
+        <div class='button' onclick='testTrial.next()'>Next</div>
+      </div>
+    </div>
+
+    <!--======== IMAGE RATING INSTRUCTIONS QUESTION ========-->
+    <div class='pageBox' id='instrQV'>
+      Which of the following is accurate based on the instructions you've received? Or if you do not remember the instructions, select the last option.<br />
+      <input type='radio' name='QPreInstrV' id='QEmoV' value='Emo' /><label for='QEmoV'>Please rate images (from 1 to 6) based on how much positive emotion the images make you feel.</label><br/>
+      <input type='radio' name='QPreInstrV' id='QSubV' value='Sub' /><label for='QSubV'>Please rate images (from 1 to 6) based on how much you like the subject of the images.</label><br/>
+      <input type='radio' name='QPreInstrV' id='QMeaningV' value='Meaning'/><label for='QMeaningV'>Please rate images (from 1 to 6) based on how much you like the meaning of the images.</label><br/>
+      <input type='radio' name='QPreInstrV' id='QMostV' value='Most' /><label for='QMostV'>Please rate images (from 1 to 6) based on how visually appealing they look to most people.</label><br/>
+      <input type='radio' name='QPreInstrV' id='QAppealV' value='Appeal' /><label for='QAppealV'>Please rate images (from 1 to 6) based on how visually appealing they look to you.</label><br/>
+      <input type='radio' name='QPreInstrV' id='QForgetV' value='Forgot' /><label for='QForgetV'>Select this option if you do not remember the instructions. </label><br/><br/>
+      <div class='button' onclick='instr.submitQ()'>Submit</div>
+    </div>
+
+    <!--======== SOUND RATING INSTRUCTIONS QUESTION ========-->
+    <div class='pageBox' id='instrQA'>
+      Which of the following is accurate based on the instructions you've received? Or if you do not remember the instructions, select the last option.<br />
+      <input type='radio' name='QPreInstrA' id='QEmoA' value='Emo' /><label for='QEmoA'>Please rate sounds (from 1 to 6) based on how much positive emotion the sounds make you feel.</label><br/>
+      <input type='radio' name='QPreInstrA' id='QSubA' value='Sub' /><label for='QSubA'>Please rate sounds (from 1 to 6) based on how much you like the objects that make the sounds.</label><br/>
+      <input type='radio' name='QPreInstrA' id='QMeaningA' value='Meaning'/><label for='QMeaningA'>Please rate sounds (from 1 to 6) based on how much you like the meaning of the sounds.</label><br/>
+      <input type='radio' name='QPreInstrA' id='QMostA' value='Most' /><label for='QMostA'>Please rate sounds (from 1 to 6) based on how aurally appealing they sound to most people.</label><br/>
+      <input type='radio' name='QPreInstrA' id='QAppealA' value='Appeal' /><label for='QAppealA'>Please rate sounds (from 1 to 6) based on how aurally appealing they sound to you.</label><br/>
+      <input type='radio' name='QPreInstrA' id='QForgetA' value='Forgot' /><label for='QForgetA'>Select this option if you do not remember the instructions. </label><br/><br/>
+      <div class='button' onclick='instr.submitQ()'>Submit</div>
+    </div>
+
+    <!--======== EXPERIMENT ========-->
+    <div class='pageBox' id='stimBox'>
+      <img id='aesImg' src='Stimuli/blank.jpg' alt='' />
+      <div id='bufferDiv' alt=''>
+        <img id='bufferImg' src='Stimuli/blank.jpg' alt='' />
+      </div>
+      <div id='audioStuff'>
+        <audio id='aesAud' onended='trial.hideAud()'>
+          <source src='Stimuli/21.mp3' type='audio/mpeg'>
+          Your browser does not support the audio element.
+        </audio>
+        <img src='Stimuli/stimPlaying.png' alt='' />
+      </div>
+      <div id='ratingContainer' class='ratingContainer'>
+    		<div class='ratingButton' id='r6'>6</div><div class='rLabels' id='r6label'>Very appealing</div>
+    		<div class='ratingButton' id='r5'>5</div>
+    		<div class='ratingButton' id='r4'>4</div>
+    		<div class='ratingButton' id='r3'>3</div>
+    		<div class='ratingButton' id='r2'>2</div>
+    		<div class='ratingButton' id='r1'>1</div><div class='rLabels' id='r1label'>Very not appealing</div>
+      </div>
+    </div>
+
+    <!--======== DEBRIEFING QUESTION ========-->
+    <div class='pageBox' id='questions'>
+      You're almost done! Please answer these last questions:<br /><br />
+
+      How often do you spontaneously notice how visually appealing (or unappealing) things are in your day-to-day life? Please choose the value from 1 to 7 that represents your experience -- where 1 means "very seldom" and 7 means "very often".<br />
+      <div class='likertWrap'>
+        <div class='likertLine'></div>
+        <div class='likert'><center><input type='radio' name='QDailyV' id='QDailyV1' value='1' required />
+        </center><label for='QDailyV1'><center>1</center><center>very seldom</center></label></div>
+        <div class='likert'><center><input type='radio' name='QDailyV'  id='QDailyV2' value='2' required />
+        </center><label for='QDailyV2'><center>2</center></label></div>
+        <div class='likert'><center><input type='radio' name='QDailyV' id='QDailyV3' value='3' required />
+        </center><label for='QDailyV3'><center>3</center></label></div>
+        <div class='likert'><center><input type='radio' name='QDailyV' id='QDailyV4' value='4' required />
+        </center><label for='QDailyV4'><center>4</center></label></div>
+        <div class='likert'><center><input type='radio' name='QDailyV' id='QDailyV5' value='5' required />
+        </center><label for='QDailyV5'><center>5</center></label></div>
+        <div class='likert'><center><input type='radio' name='QDailyV' id='QDailyV6' value='6' required />
+        </center><label for='QDailyV6'><center>6</center></label></div>
+        <div class='likert'><center><input type='radio' name='QDailyV' id='QDailyV7' value='7' required />
+        </center><label for='QDailyV7'><center>7</center><center>very often</center></label></div>
+      </div><br/><br/>
+
+      How often do you spontaneously notice how aurally appealing (or unappealing) environmental sounds are in your day-to-day life? Please choose the value from 1 to 7 that represents your experience -- where 1 means "very seldom" and 7 means "very often".<br />
+      <div class='likertWrap'>
+        <div class='likertLine'></div>
+        <div class='likert'><center><input type='radio' name='QDailyA' id='QDailyA1' value='1' required />
+        </center><label for='QDailyA1'><center>1</center><center>very seldom</center></label></div>
+        <div class='likert'><center><input type='radio' name='QDailyA'  id='QDailyA2' value='2' required />
+        </center><label for='QDailyA2'><center>2</center></label></div>
+        <div class='likert'><center><input type='radio' name='QDailyA' id='QDailyA3' value='3' required />
+        </center><label for='QDailyA3'><center>3</center></label></div>
+        <div class='likert'><center><input type='radio' name='QDailyA' id='QDailyA4' value='4' required />
+        </center><label for='QDailyA4'><center>4</center></label></div>
+        <div class='likert'><center><input type='radio' name='QDailyA' id='QDailyA5' value='5' required />
+        </center><label for='QDailyA5'><center>5</center></label></div>
+        <div class='likert'><center><input type='radio' name='QDailyA' id='QDailyA6' value='6' required />
+        </center><label for='QDailyA6'><center>6</center></label></div>
+        <div class='likert'><center><input type='radio' name='QDailyA' id='QDailyA7' value='7' required />
+        </center><label for='QDailyA7'><center>7</center><center>very often</center></label></div>
+      </div><br/><br/>
+
+      Did you complete this survey seriously throughout (without randomly clicking through any part of the survey)?<br />(Your credit will be granted regardless what your answer is here. Please be honest for science! Thanks!)<br />
+      <input type='radio' name='QSerious' id='QSeriousY' value='True' /><label for='QSeriousY'>Yes, I did.</label><br/>
+      <input type='radio' name='QSerious' id='QSeriousN' value='False' /><label for='QSeriousN'>No, not completely.</label><br/><br/>
+
+      Was any part of the procedure unclear? Did you have any problems completing any of the tasks?<br />(Your credit will be granted regardless what your answer is here. Please be honest for science! Thanks!)<br />
+      <textarea id='problems' rows='3' cols='90'></textarea><br /><br />
+      <div class='button' onclick='subj.submitQ()'>Submit</div>
+    </div>
+
+    <!--======== DEBRIEFING ========-->
+    <div class='pageBox' id='debriefing'>
+        That is all for the demo experiment. Thank you for taking a look!<br />
+        You may find the relevant publication here:<br />
+        The materials used in this project can be find here: [OSF public link]<br /><br />
+
+        Also, feel free to visit the our webpages to learn more about our research:<br />
+        Yi-Chia Chen: <a href='https://ycc.vision/' target="_blank">https://ycc.vision/</a><br />
+        Andrew Chang: <a href='https://andrew-chang.org/' target="_blank">https://andrew-chang.org/</a><br />
+        Monica Rosenberg: <a href='https://cablab.uchicago.edu/' target="_blank">https://cablab.uchicago.edu/</a><br />
+        Derek Feng: <a href='http://www.stat.yale.edu/~df342/' target="_blank">http://www.stat.yale.edu/~df342/</a><br />
+        Brian Scholl: <a href='http://perception.yale.edu/Brian/' target="_blank">http://perception.yale.edu/Brian/</a><br />
+        Laurel Trainor: <a href='https://trainorlab.mcmaster.ca/' target="_blank">https://trainorlab.mcmaster.ca/</a>
+    </div>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mobile-detect/1.4.4/mobile-detect.min.js'></script>
+    <script src='expt.js'></script>
+    <script src='index.js'></script>
+  </body>
+</html>
